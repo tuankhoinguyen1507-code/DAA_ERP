@@ -1,9 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-// Đổi BrowserRouter thành HashRouter ở dòng này
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
@@ -13,7 +7,6 @@ import Fees from './pages/Fees';
 
 export default function App() {
   return (
-    // Đổi thẻ bao bọc thành HashRouter
     <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
