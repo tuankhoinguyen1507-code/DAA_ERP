@@ -197,7 +197,7 @@ export default function Dashboard() {
           <div className="bg-primary text-on-primary p-6 rounded-2xl shadow-lg relative overflow-hidden group">
             <div className="relative z-10">
               <h4 className="text-lg font-bold mb-2 tracking-tight">Quick Invoice</h4>
-              <p className="text-primary-container text-xs mb-5 font-medium opacity-90 leading-relaxed">Send fee notifications to parents via Zalo/Email with one click.</p>
+              <p className="text-on-primary/80 text-xs mb-5 font-medium leading-relaxed">Send fee notifications to parents via Zalo/Email with one click.</p>
               <button className="w-full bg-surface-container-lowest text-primary font-bold py-2.5 rounded-xl text-sm shadow-sm hover:bg-surface-bright transition-all group-hover:scale-[1.02]">
                 Generate Invoice
               </button>

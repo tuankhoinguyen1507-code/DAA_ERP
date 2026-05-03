@@ -50,14 +50,14 @@ export default function Layout() {
     return hasPermission(item.requiredPermission);
   });
 
-  const TopHeaderControls = () => (
+  const renderTopHeaderControls = () => (
     <>
       <button onClick={toggleLanguage} className="flex items-center gap-1 font-bold text-xs uppercase text-on-surface-variant hover:text-primary transition-colors px-2">
         <Globe className="w-4 h-4" />
         {language}
       </button>
-      <button onClick={toggleTheme} className="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full">
-        {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      <button onClick={toggleTheme} className="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full ring-1 ring-outline/20 bg-surface-container-low/50 hover:bg-surface-bright">
+        {isDarkMode ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-700" />}
       </button>
       <div className="relative">
         <button onClick={() => setShowRoleMenu(!showRoleMenu)} className="flex items-center gap-2 pl-2 border-l border-outline-variant hover:opacity-80 transition-opacity">
@@ -87,28 +87,28 @@ export default function Layout() {
     <AppProvider>
       <div className="bg-background text-on-background font-body-main antialiased min-h-screen flex flex-col">
         {/* Top App Bar (Mobile) */}
-        <header className="lg:hidden flex justify-between items-center w-full px-4 h-14 sticky top-0 z-40 bg-surface-container-lowest/80 backdrop-blur-sm border-b border-outline-variant">
+        <header className="md:hidden flex justify-between items-center w-full px-4 h-14 sticky top-0 z-40 bg-surface-container-lowest/80 backdrop-blur-sm border-b border-outline-variant">
           <div className="flex items-center gap-2">
             <span className="text-base text-primary font-bold">DAA Hub</span>
             <span className="bg-primary/10 text-primary text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ml-1">{user?.role}</span>
           </div>
           <div className="flex items-center gap-1">
-            <TopHeaderControls />
+            {renderTopHeaderControls()}
           </div>
         </header>
 
         {/* Side Navigation (Desktop) */}
-        <nav className="hidden lg:flex flex-col fixed left-0 top-0 h-full py-6 w-64 bg-surface-container-lowest border-r border-outline-variant z-50">
+        <nav className="hidden md:flex flex-col fixed left-0 top-0 h-full py-6 w-64 bg-surface-container-lowest border-r border-outline-variant z-50 transition-colors">
           <div className="px-6 mb-8 flex items-center gap-3">
             <div className="w-10 h-10 rounded bg-primary-container flex items-center justify-center text-on-primary-container font-h2 shrink-0">
               D
             </div>
             <div>
-              <h1 className="text-lg font-bold tracking-tight text-primary leading-tight">DAA Management Hub</h1>
+              <h1 className="text-lg font-bold tracking-tight text-primary leading-tight">DAA Hub</h1>
               <p className="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Academic ERP</p>
             </div>
           </div>
-          <div className="flex-1 overflow-y-auto font-sans antialiased text-sm font-medium">
+          <div className="flex-1 overflow-y-auto font-sans antialiased text-sm font-medium pt-2">
             <ul className="space-y-1">
               {navigation.map((item) => (
                 <li key={item.name}>
@@ -118,7 +118,7 @@ export default function Layout() {
                       cn(
                         "flex items-center gap-3 px-6 py-3 transition-all duration-200",
                         isActive
-                          ? "text-primary font-bold border-r-2 border-primary bg-primary-fixed/50"
+                          ? "text-primary font-bold border-r-2 border-primary bg-primary/10"
                           : "text-on-surface-variant hover:bg-surface-bright transition-colors duration-150"
                       )
                     }
@@ -131,7 +131,7 @@ export default function Layout() {
             </ul>
           </div>
           <div className="mt-auto pt-4 border-t border-outline-variant font-sans antialiased text-sm font-bold">
-            <a href="#" className="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:text-error hover:bg-error/10 transition-colors duration-150 rounded-lg mx-3">
+            <a href="#" onClick={() => logout()} className="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:text-error hover:bg-error/10 transition-colors duration-150 rounded-lg mx-3">
               <LogOut className="h-5 w-5" />
               Sign Out
             </a>
@@ -139,18 +139,18 @@ export default function Layout() {
         </nav>
 
         {/* Main Content Area */}
-        <main className="flex-1 lg:ml-64 relative flex flex-col min-h-[calc(100vh-3.5rem)] lg:min-h-screen">
+        <main className="flex-1 md:ml-64 relative flex flex-col min-h-[calc(100vh-3.5rem)] md:min-h-screen">
           {/* Top Header (Desktop) */}
-          <header className="hidden lg:flex justify-end items-center px-8 h-16 border-b border-outline-variant bg-surface-container-lowest sticky top-0 z-30">
+          <header className="hidden md:flex justify-end items-center px-8 h-16 border-b border-outline-variant bg-surface-container-lowest sticky top-0 z-30 transition-colors">
             <div className="flex items-center gap-4">
-               <TopHeaderControls />
+               {renderTopHeaderControls()}
             </div>
           </header>
           <Outlet />
         </main>
 
         {/* Bottom Nav Bar (Mobile) */}
-        <nav className="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant shadow-lg pb-safe">
+        <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant shadow-lg pb-safe">
           {navigation.map((item) => (
             <NavLink
               key={item.name}
