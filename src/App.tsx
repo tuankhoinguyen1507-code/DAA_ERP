@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// Đổi BrowserRouter thành HashRouter ở dòng này
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Students from './pages/Students';
@@ -12,7 +13,8 @@ import Fees from './pages/Fees';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    // Đổi thẻ bao bọc thành HashRouter
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
@@ -21,6 +23,6 @@ export default function App() {
           <Route path="fees" element={<Fees />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
